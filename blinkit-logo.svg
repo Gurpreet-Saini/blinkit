@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 50" width="150" height="42">
+  <!-- Blinkit Signature Pill Badge -->
+  <rect width="180" height="50" rx="12" fill="#F7EC13"/>
+  <g transform="translate(15, 35)">
+    <!-- 'blink' in bold black -->
+    <text font-family="'Outfit', 'Inter', 'Segoe UI', sans-serif" font-weight="900" font-size="34" letter-spacing="-1.5px" fill="#000000">blink<tspan fill="#0C831F">it</tspan></text>
+  </g>
+</svg>
