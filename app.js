@@ -215,6 +215,11 @@ window.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     setupEventListeners();
     setupSearchSuggestions();
+    
+    // Automatically trigger audio on site load
+    setTimeout(() => {
+        tryAutoPlayAudio();
+    }, 400);
 });
 
 // Setup Events
@@ -591,6 +596,41 @@ function closeCelebrationFlow() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+let hasAutoPlayed = false;
+
+function tryAutoPlayAudio() {
+    if (hasAutoPlayed) return;
+    
+    const promise = playMemeSound();
+    if (promise && typeof promise.then === "function") {
+        promise.then(() => {
+            hasAutoPlayed = true;
+        }).catch(() => {
+            // Browser blocked un-triggered autoplay: attach to first user interaction
+            setupFirstInteractionAudio();
+        });
+    } else {
+        setupFirstInteractionAudio();
+    }
+}
+
+function setupFirstInteractionAudio() {
+    const handleFirstGesture = () => {
+        if (!hasAutoPlayed) {
+            playMemeSound();
+            hasAutoPlayed = true;
+        }
+        document.removeEventListener("click", handleFirstGesture);
+        document.removeEventListener("touchstart", handleFirstGesture);
+        document.removeEventListener("keydown", handleFirstGesture);
+        document.removeEventListener("mousemove", handleFirstGesture);
+    };
+    document.addEventListener("click", handleFirstGesture, { once: true });
+    document.addEventListener("touchstart", handleFirstGesture, { once: true });
+    document.addEventListener("keydown", handleFirstGesture, { once: true });
+    document.addEventListener("mousemove", handleFirstGesture, { once: true });
+}
+
 // Play "Kyu Hila Dala Na?" audio file
 function playMemeSound() {
     const audio = document.getElementById("hila-dala-audio") || new Audio("Kyu-Hila-Dala-Na.mp4");
@@ -598,8 +638,8 @@ function playMemeSound() {
         audio.currentTime = 0;
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-            playPromise.catch(err => {
-                console.log("Audio playback interrupted or blocked:", err);
+            return playPromise.catch(err => {
+                console.log("Audio playback interrupted or blocked by browser:", err);
                 // Fallback to Web Speech API if audio playback fails
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -609,9 +649,11 @@ function playMemeSound() {
                     utterance.pitch = 0.9;
                     window.speechSynthesis.speak(utterance);
                 }
+                throw err;
             });
         }
     }
+    return Promise.resolve();
 }
 
 // Visual/haptic vibe feedback
