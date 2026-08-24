@@ -5,8 +5,68 @@
 // 1. Meme Products Database
 const MEME_PRODUCTS = [
     {
+        id: "p13",
+        name: "WFH Silk Pajama Set (Zero Commute Edition)",
+        weight: "1 pair",
+        price: 0,
+        originalPrice: 1999,
+        badge: "WFH FLEX",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
+        id: "p14",
+        name: "WFO Morning Traffic Simulator (3-Hour Jam)",
+        weight: "1 experience",
+        price: 999,
+        originalPrice: 0,
+        badge: "WFO PAIN",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
+        id: "p15",
+        name: "Mid-Day WFH Power Nap (Bed Approved)",
+        weight: "45 mins",
+        price: 0,
+        originalPrice: 500,
+        badge: "WFH WIN",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
+        id: "p16",
+        name: "Office AC Survival Jacket (Set to 16°C Freeze)",
+        weight: "1 unit",
+        price: 799,
+        originalPrice: 1200,
+        badge: "WFO FREEZE",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
+        id: "p17",
+        name: "Camera-Off Zoom Munchies Box",
+        weight: "300g",
+        price: 49,
+        originalPrice: 100,
+        badge: "SECRET EATS",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
+        id: "p18",
+        name: "WFO Canteen Special Cold Chai",
+        weight: "100ml",
+        price: 150,
+        originalPrice: 20,
+        badge: "WFO SADNESS",
+        category: "WFH vs WFO",
+        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
+    },
+    {
         id: "p1",
-        name: "Hila Dala Masala (Pure Surprise)",
+        name: "Hila Dala Masala (Pure WFH Surprise)",
         weight: "100g",
         price: 45,
         originalPrice: 90,
@@ -16,7 +76,7 @@ const MEME_PRODUCTS = [
     },
     {
         id: "p2",
-        name: "Sivaji Boss Sunglasses (Super Polarized)",
+        name: "Sivaji Boss Sunglasses (WFH Flex Edition)",
         weight: "1 unit",
         price: 499,
         originalPrice: 999,
@@ -26,7 +86,7 @@ const MEME_PRODUCTS = [
     },
     {
         id: "p3",
-        name: "Choco-Shock Shake (Ground Shaking)",
+        name: "Choco-Shock Shake (Home Kitchen Made)",
         weight: "200ml",
         price: 60,
         originalPrice: 75,
@@ -86,21 +146,11 @@ const MEME_PRODUCTS = [
     },
     {
         id: "p9",
-        name: "Mind-Blown Milk (Organic & Shocking)",
+        name: "Mind-Blown Milk (Organic WFH)",
         weight: "1L",
         price: 66,
         originalPrice: 70,
         badge: "DAILY",
-        category: "Masala & Munchies",
-        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
-    },
-    {
-        id: "p10",
-        name: "Shaking Shrikhand (Sweet Surprise)",
-        weight: "250g",
-        price: 90,
-        originalPrice: 120,
-        badge: "SWEET",
         category: "Masala & Munchies",
         image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
     },
@@ -113,22 +163,13 @@ const MEME_PRODUCTS = [
         badge: "BOSS VALUE",
         category: "Rajni Specials",
         image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
-    },
-    {
-        id: "p12",
-        name: "Shocking Butter (Spreads Shakes)",
-        weight: "100g",
-        price: 55,
-        originalPrice: 60,
-        badge: "FRESH",
-        category: "Masala & Munchies",
-        image: "https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif"
     }
 ];
 
 // Categories list
 const CATEGORIES = [
     "All Shocks",
+    "WFH vs WFO",
     "Rajni Specials",
     "Style & Sunglasses",
     "Masala & Munchies",
@@ -223,7 +264,7 @@ function setupEventListeners() {
 
     // Location Change - funny warning
     locationTrigger.addEventListener("click", () => {
-        alert("Delivery location is locked to Sivaji's Kingdom, Chennai. Changing location is physically impossible when Sivaji is running towards you!");
+        alert("Location is locked to Bed & Couch, WFH Kingdom. Commute: 0 seconds! Changing location to Office Traffic is forbidden by Rajinikanth!");
         triggerVibrationFeedback();
     });
 }
@@ -236,6 +277,7 @@ function renderCategories() {
         
         // Custom silhouettes/symbols for categorizing memes
         if (cat === "All Shocks") iconHtml = `<i class="fa-solid fa-bolt" style="font-size: 24px; color: #f7ec13;"></i>`;
+        else if (cat === "WFH vs WFO") iconHtml = `<i class="fa-solid fa-house-laptop" style="font-size: 24px; color: #9c27b0;"></i>`;
         else if (cat === "Rajni Specials") iconHtml = `<i class="fa-solid fa-crown" style="font-size: 24px; color: #ff9800;"></i>`;
         else if (cat === "Style & Sunglasses") iconHtml = `<i class="fa-solid fa-glasses" style="font-size: 24px; color: #1f1f1f;"></i>`;
         else if (cat === "Masala & Munchies") iconHtml = `<i class="fa-solid fa-pepper-hot" style="font-size: 24px; color: #e53935;"></i>`;
