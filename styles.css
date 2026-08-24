@@ -1219,6 +1219,18 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--light-text);
 }
 
+.ps-footer-note {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #d32f2f;
+    background-color: #fbe9e7;
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: var(--border-radius-md);
+    border: 1px dashed #ffab91;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 900px) {
     .header-container {
