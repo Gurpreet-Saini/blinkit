@@ -267,6 +267,30 @@ h1, h2, h3, h4, h5, h6 {
     flex-shrink: 0;
 }
 
+.sound-btn-header {
+    background-color: #000000;
+    color: var(--primary-yellow);
+    border: 1px dashed var(--primary-yellow);
+    padding: 8px 14px;
+    border-radius: var(--border-radius-md);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    font-family: var(--font-heading);
+    box-shadow: var(--shadow-sm);
+}
+
+.sound-btn-header:hover {
+    background-color: var(--primary-yellow);
+    color: #000000;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
 .login-btn {
     background: none;
     border: none;

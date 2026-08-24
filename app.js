@@ -166,6 +166,7 @@ const floatingTotalText = document.getElementById("floating-total-text");
 const floatingCartTrigger = document.getElementById("floating-cart-trigger");
 const bannerActionBtn = document.getElementById("banner-action");
 const locationTrigger = document.getElementById("delivery-location-trigger");
+const playAudioBtn = document.getElementById("play-audio-btn");
 
 // 4. Initialize App
 window.addEventListener("DOMContentLoaded", () => {
@@ -182,6 +183,14 @@ function setupEventListeners() {
     floatingCartTrigger.addEventListener("click", openCartDrawer);
     closeDrawerBtn.addEventListener("click", closeCartDrawer);
     cartDrawerOverlay.addEventListener("click", closeCartDrawer);
+
+    // Audio button trigger
+    if (playAudioBtn) {
+        playAudioBtn.addEventListener("click", () => {
+            playMemeSound();
+            shakeElement(playAudioBtn);
+        });
+    }
 
     // Place Order Flow
     placeOrderTrigger.addEventListener("click", triggerCheckoutFlow);
@@ -206,6 +215,7 @@ function setupEventListeners() {
 
     // Banner Promo click
     bannerActionBtn.addEventListener("click", () => {
+        playMemeSound();
         // Automatically scroll to products list and add a few surprise items
         document.querySelector(".products-section").scrollIntoView({ behavior: 'smooth' });
         shakeElement(productsContainer);
@@ -539,17 +549,26 @@ function closeCelebrationFlow() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Speak "Kyu Hila Dala Na?" using window.speechSynthesis
+// Play "Kyu Hila Dala Na?" audio file
 function playMemeSound() {
-    if ('speechSynthesis' in window) {
-        // Cancel any running speech
-        window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance("Kyu, hila dala na?");
-        utterance.lang = "hi-IN"; // Hindi language accent
-        utterance.rate = 1.0;
-        utterance.pitch = 0.9;
-        window.speechSynthesis.speak(utterance);
+    const audio = document.getElementById("hila-dala-audio") || new Audio("Kyu-Hila-Dala-Na.mp4");
+    if (audio) {
+        audio.currentTime = 0;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(err => {
+                console.log("Audio playback interrupted or blocked:", err);
+                // Fallback to Web Speech API if audio playback fails
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance("Kyu, hila dala na?");
+                    utterance.lang = "hi-IN";
+                    utterance.rate = 1.0;
+                    utterance.pitch = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+        }
     }
 }
 
