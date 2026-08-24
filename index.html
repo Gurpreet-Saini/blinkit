@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blinkit (Hila Dala Edition) - Instant Grocery Delivery</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Alert Banner -->
+    <div class="top-alert-banner">
+        <span>🎉 Special Offer: Use Code <strong>HILADALA100</strong> for 100% shock value!</span>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <span class="brand-logo">blink<span class="logo-highlight">it</span></span>
+                <span class="logo-subtext">Hila Dala Edition</span>
+            </div>
+
+            <!-- Delivery Info -->
+            <div class="delivery-info" id="delivery-location-trigger">
+                <div class="delivery-time-container">
+                    <span class="delivery-label">Shaking in</span>
+                    <span class="delivery-time">8 SECONDS</span>
+                </div>
+                <div class="delivery-address">
+                    <span class="address-text">Sivaji's Palace, Chennai - 600001</span>
+                    <i class="fa-solid fa-chevron-down address-arrow"></i>
+                </div>
+            </div>
+
+            <!-- Search Bar Section -->
+            <div class="search-bar-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search 'milk', 'chips', 'shocks' or anything..." autocomplete="off">
+                <div class="search-dropdown" id="search-suggestions">
+                    <!-- Dynamic search suggestions -->
+                </div>
+            </div>
+
+            <!-- Login & Cart Section -->
+            <div class="header-actions">
+                <button class="login-btn">Login</button>
+                <button class="cart-btn-header" id="cart-header-trigger">
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    <span class="cart-btn-text" id="cart-header-text">My Cart</span>
+                    <span class="cart-badge" id="cart-badge-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        <!-- Hero Banners Section -->
+        <section class="hero-banners">
+            <div class="banner-carousel">
+                <div class="banner-slide" id="active-slide">
+                    <div class="banner-content">
+                        <span class="banner-tagline">100% Fresh Surprise</span>
+                        <h1 class="banner-title">Kyu, Hila Dala Na?</h1>
+                        <p class="banner-description">Get instant shocks delivered straight to your screens in 8 seconds flat. No groceries, only boss moves.</p>
+                        <button class="banner-action-btn" id="banner-action">Order Shock Now</button>
+                    </div>
+                    <div class="banner-image-container">
+                        <img src="https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif" alt="Kyu Hila Dala Na" class="banner-gif-preview">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid" id="categories-container">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Product Listing Section -->
+        <section class="products-section">
+            <div class="products-header">
+                <h2 class="section-title" id="products-grid-title">Hila Dala Specials</h2>
+                <div class="filter-options">
+                    <span class="filter-label">Sort by:</span>
+                    <select id="sort-select" class="sort-dropdown">
+                        <option value="default">Relevance (Meme Level)</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="products-grid" id="products-container">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Cart Bar (Appears when items are added, typical mobile web behavior) -->
+    <div class="floating-cart-bar" id="floating-cart-bar">
+        <div class="floating-cart-info">
+            <span class="floating-cart-qty" id="floating-qty-text">1 Item</span>
+            <span class="floating-cart-dot"></span>
+            <span class="floating-cart-total" id="floating-total-text">₹45</span>
+        </div>
+        <button class="view-cart-btn" id="floating-cart-trigger">
+            <span>View Cart</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Right-side Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3>My Cart</h3>
+            <button class="close-drawer-btn" id="close-drawer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="drawer-content" id="drawer-items-container">
+            <!-- Added items will appear here -->
+        </div>
+
+        <!-- Checkout Billing details -->
+        <div class="drawer-footer" id="drawer-footer">
+            <div class="bill-details">
+                <h4>Bill Details</h4>
+                <div class="bill-row">
+                    <span>Meme Items Total</span>
+                    <span id="bill-subtotal">₹0</span>
+                </div>
+                <div class="bill-row">
+                    <span>Shock Delivery Charge</span>
+                    <span class="free-charge">FREE <del class="original-charge">₹15</del></span>
+                </div>
+                <div class="bill-row promo-row" id="promo-row">
+                    <span>Meme Discount (HILADALA100)</span>
+                    <span class="discount-applied">-₹0</span>
+                </div>
+                <div class="bill-row grand-total-row">
+                    <strong>Grand Total</strong>
+                    <strong id="bill-grand-total">₹0</strong>
+                </div>
+            </div>
+            
+            <button class="place-order-btn" id="place-order-trigger">
+                <span>Proceed to Checkout</span>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Fullscreen Checkout Celebration Modal -->
+    <div class="checkout-modal-overlay" id="checkout-modal">
+        <div class="checkout-modal-content">
+            <!-- Confetti Canvas -->
+            <canvas id="confetti-canvas"></canvas>
+            
+            <div class="celebration-card">
+                <div class="success-ring">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h2>Order Shaked Successfully!</h2>
+                <p class="order-id">Order ID: #SHOCK-8888-HILA</p>
+                
+                <div class="meme-display-box">
+                    <img src="https://media1.tenor.com/m/x9kthrPgkiMAAAAC/kyu-hila-dala-na.gif" alt="Kyu Hila Dala Na" class="modal-meme-gif">
+                </div>
+
+                <div class="speech-bubble">
+                    <p>"Kyu, Hila Dala Na?!"</p>
+                </div>
+                
+                <p class="delivery-status">Sivaji the Boss has dispatched himself and will arrive at your location in exactly <strong>8 seconds</strong>!</p>
+                
+                <button class="close-modal-btn" id="close-celebration-btn">Shop More Shocks</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="main-footer-section">
+        <p>© 2026 blinkit Clone - Meme Edition. "Kyu Hila Dala Na?" is property of Rajinikanth & Sivaji the Boss. No real groceries were harmed in the making of this site.</p>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
